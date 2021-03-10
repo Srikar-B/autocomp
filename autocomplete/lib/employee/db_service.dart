@@ -32,11 +32,16 @@ Future<void> deleteDB() async {
 
 // STORE EMployee FUNCTION
 
-Future<bool> saveEmployee(Employee employeeObject) async {
+Future<bool> saveEmployee(List<Employee> fakeRecords) async {
   var db = await databaseInit();
+  Batch batch = db.batch();
 
-  var resId = await db.insert("Employees", employeeObject.toMap());
-  print(employeeObject.name);
+  for (var rec in fakeRecords) {
+    batch.insert("Employees", rec.toMap());
+  }
+  var resId = await batch.commit(noResult: false);
+  // var resId = await db.insert("Employees", employeeObject.toMap());
+  // print(employeeObject.name);
 
   return resId == null ? Future.value(false) : Future.value(true);
 }
@@ -59,12 +64,4 @@ Future<List<Employee>> getOfflineEmployees(String pattern, String field) async {
     return offemployees;
   }
   return [];
-}
-
-//DELETE A record
-
-Future<bool> deleteemployee(int eid) async {
-  var db = await databaseInit();
-  var res = await db.delete("Employees", where: "eid=$eid");
-  return (res == null) ? Future.value(false) : Future.value(true);
 }

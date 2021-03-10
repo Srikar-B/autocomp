@@ -52,10 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
       fakeRecords.add(emp);
     }
     // add each record to the db
-    for (var rec in fakeRecords) {
-      var resp = await saveEmployee(rec);
-      print(resp);
-    }
+    var resp = await saveEmployee(fakeRecords);
+
     // fakeRecords.forEach((element) async {
     //   var resp = await saveEmployee(element);
     //   print(resp);
