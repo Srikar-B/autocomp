@@ -133,7 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            if (!recloading) createFakeRecords();
+            if (!recloading) {
+              deleteDB();
+              createFakeRecords();
+            }
           },
           tooltip: 'Add 1K records',
           child: recloading
