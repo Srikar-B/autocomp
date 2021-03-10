@@ -30,16 +30,13 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-enum SingingCharacter { name, email, occupation, company }
-
 class _MyHomePageState extends State<MyHomePage> {
-  SingingCharacter _character = SingingCharacter.name;
   String field = 'name';
   var faker = Faker();
   List<Employee> fakeRecords = [];
   List<Employee> matchedRecords = [];
   bool recloading = false;
-  createFakeRecords() async {
+  void createFakeRecords() async {
     var start = DateTime.now().millisecondsSinceEpoch;
     setState(() {
       recloading = true;
@@ -122,56 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     matchedRecords = [];
                     field = val;
                   });
-                })
-            // // Wrap(
-            //   children: <Widget>[
-            //     RadioListTile<SingingCharacter>(
-            //       title: const Text('name'),
-            //       value: SingingCharacter.name,
-            //       groupValue: _character,
-            //       onChanged: (SingingCharacter value) {
-            //         setState(() {
-            //           _character = value;
-            //           field = 'name';
-            //         });
-            //       },
-            //     ),
-            //     RadioListTile<SingingCharacter>(
-            //       title: const Text('email'),
-            //       value: SingingCharacter.email,
-            //       groupValue: _character,
-            //       onChanged: (SingingCharacter value) {
-            //         setState(() {
-            //           _character = value;
-            //           field = 'email';
-            //         });
-            //       },
-            //     ),
-            //     RadioListTile<SingingCharacter>(
-            //       title: const Text('job'),
-            //       value: SingingCharacter.occupation,
-            //       groupValue: _character,
-            //       onChanged: (SingingCharacter value) {
-            //         setState(() {
-            //           _character = value;
-            //           field = 'occupation';
-            //         });
-            //       },
-            //     ),
-            //     RadioListTile<SingingCharacter>(
-            //       title: const Text('company'),
-            //       value: SingingCharacter.company,
-            //       groupValue: _character,
-            //       onChanged: (SingingCharacter value) {
-            //         setState(() {
-            //           _character = value;
-            //           field = 'company';
-            //         });
-            //       },
-            //     ),
-            //   ],
-            // ),
-            ,
+                }),
             Expanded(
               child: ListView.builder(
                   itemCount: matchedRecords.length,
